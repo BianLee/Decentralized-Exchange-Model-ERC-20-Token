@@ -5,6 +5,7 @@ pragma solidity ^0.8.16;
 import './BianToken.sol';
 import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol"; 
 
+
 contract BianTokenSale {
     address payable public admin;
     // ethFunds is like the reserve ?? 
@@ -27,21 +28,15 @@ contract BianTokenSale {
     mapping(uint256 => Transaction) public transaction;
 
     constructor(BianToken _token) {
-        priceFeed = AggregatorV3Interface(0xD4a33860578De61DBAbDc8BFdb98FD742fA7028e); 
-        tokenPriceUSD = 50;
+        priceFeed = AggregatorV3Interface(0x5f4eC3Df9cbd43714FE2740f5E3616155c5b8419); 
+        tokenPriceUSD = 5;
         token = _token;
         admin = payable(msg.sender); 
     }
 
    function getETHPrice() public view returns (int) {
-        (
-            /*uint80 roundID*/,
-            int price,
-            /*uint startedAt*/,
-            /*uint timeStamp*/,
-            /*uint80 answeredInRound*/
-        ) = priceFeed.latestRoundData();
-        return price;
+        (, int price, , , ) = priceFeed.latestRoundData();
+        return (price / 10**8);
     }
 
     function bianTokenPriceInETH() public view returns(int) {

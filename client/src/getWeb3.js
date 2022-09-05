@@ -4,21 +4,36 @@ import BianTokenSale from "./contracts/BianTokenSale.json";
 const contract = require('@truffle/contract'); 
 
 export const load = async() => {
+
+    //get first account running the sale contract (?)
+
+
+
+
+
     await loadWeb3();
+
+   //  console.log(window.web3.eth.defaultAccount);
+   // console.log(account1); 
+
+
+
     const account = await loadAccount(); 
     const { contractBT, contractBTS } = await loadContracts(); 
     const { ethFunds, transactionCount, tokensSold, ethPriceN, transactions } = await loadVariables(contractBTS);
     const bal = await contractBT.balanceOf(account); //balance on buyer's account (what's the unit?)
     const myBT = bal / 10**18;
-    return {account, contractBTS, contractBT, ethFunds, transactionCount, tokensSold, ethPriceN, transactions, myBT};
+    return {account, contractBTS, contractBT, ethFunds, transactionCount, tokensSold, transactions, myBT};
 }
 
 
 
 const loadVariables = async (contractBTS) => {
-    const admin = "0x9316f5c7548Cd431Eac52C53d8B376D36E41024A"; 
-    // const admin = "0x2938dbA07dEF54DB249b33EAf848D509E6be4C46";
-    const ethFunds = await window.web3.eth.getBalance(admin); 
+
+    const admin = "0xF8A66251975d852aB994Fad385Dca03C086C74F3"; 
+    const ethFunds = await window.web3.eth.getBalance(admin);
+    
+    console.log(ethFunds); 
     const tCount = await contractBTS.transactionCount(); 
     const transactionCount = tCount.toNumber();
     const tSold = await contractBTS.tokensSold();
@@ -39,7 +54,7 @@ const loadVariables = async (contractBTS) => {
         j++;
         transactions.push(t); 
     }
-    return { ethFunds, transactionCount, tokensSold, transactions };
+    return { ethFunds, transactionCount, tokensSold, transactions  };
 }
 
 
@@ -56,6 +71,9 @@ const loadContracts = async () => {
 
     const contractBT = await BTContract.deployed();
     const contractBTS = await BTSContract.deployed(); 
+
+
+    
     return { contractBT, contractBTS }; 
 
     /* await contract.deployed() is creating instance of MyContract
