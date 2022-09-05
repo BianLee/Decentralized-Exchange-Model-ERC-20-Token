@@ -33,10 +33,15 @@ contract BianTokenSale {
         admin = payable(msg.sender); 
     }
 
-    function getETHPrice() public view returns(int) {
-        (, int price, , , ) = priceFeed.latestRoundData();
-        return (price / 10**8); 
-
+   function getETHPrice() public view returns (int) {
+        (
+            /*uint80 roundID*/,
+            int price,
+            /*uint startedAt*/,
+            /*uint timeStamp*/,
+            /*uint80 answeredInRound*/
+        ) = priceFeed.latestRoundData();
+        return price;
     }
 
     function bianTokenPriceInETH() public view returns(int) {

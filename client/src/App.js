@@ -6,16 +6,22 @@ class App extends React.Component {
     constructor() {
         super();
         this.state = {
-
+            account: "", 
+            contractAddress: "0xa7dAB845A24Ab0f504faA5fb54Ea4Cfff35F7183", 
         }
         this.connectWallet = this.connectWallet.bind(this);
+        
     }
 
+
     
-    connectWallet() {
-        load().then(
-            
-        )
+    async connectWallet() {
+        const {account, contractBTS, contractBT, ethFunds, transactionCount, tokensSold, transactions, myBT} = await load(); 
+        console.log(account);
+        
+        this.setState({
+            account: account,
+        })
     }
 
 
@@ -31,8 +37,16 @@ class App extends React.Component {
     return (
       <>
         <center>
-          <h1>BianCoin</h1>
-          <button onClick={this.connectWallet}>Connect Coin</button> 
+          <h1>BianToken</h1>
+          <p><b>Token Contract Address</b>: {this.state.contractAddress} 
+            <br/><b>Token Symbol</b>: BIAN
+            <br/><b>Token Decimal</b>: 18
+            <br/><br/>
+          </p>
+          
+          
+          <p><b>Your Address</b>: {this.state.account}</p>
+          <button onClick={this.connectWallet}>Connect Wallet</button> 
         </center>
       </>
     )

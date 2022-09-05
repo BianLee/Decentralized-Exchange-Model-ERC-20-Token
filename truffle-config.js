@@ -76,12 +76,20 @@ module.exports = {
     // tab if you use this network and you must also set the `host`, `port` and `network_id`
     // options below to some value.
     //
+
+    /* 
     development: {
      host: "127.0.0.1",     // Localhost (default: none)
      port: 8545,            // Standard Ethereum port (default: none)
      network_id: "*",       // Any network (default: none)
     },
-    
+    */ 
+    development: {
+      host: "127.0.0.1",
+      port: 8545,
+      network_id: "*"
+    },
+
     // An additional network, but with some advanced options…
     // advanced: {
     //   port: 8777,             // Custom port
@@ -97,6 +105,9 @@ module.exports = {
     // goerli for testlink 
 
 
+    // Below is using infura.io
+    /* 
+
     goerli: {
       provider: () => {
         return new HDWalletProvider(process.env.MNEMONIC, 'https://goerli.infura.io/v3/' + process.env.INFURA_API_KEY)
@@ -106,6 +117,9 @@ module.exports = {
       gasPrice: 10000000000,
     },
 
+      */
+
+    
 
     /* 
     goerli: {

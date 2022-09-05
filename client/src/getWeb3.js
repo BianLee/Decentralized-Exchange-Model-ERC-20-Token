@@ -16,14 +16,17 @@ export const load = async() => {
 
 
 const loadVariables = async (contractBTS) => {
-    const admin = "0x2938dbA07dEF54DB249b33EAf848D509E6be4C46";
+    const admin = "0x9316f5c7548Cd431Eac52C53d8B376D36E41024A"; 
+    // const admin = "0x2938dbA07dEF54DB249b33EAf848D509E6be4C46";
     const ethFunds = await window.web3.eth.getBalance(admin); 
     const tCount = await contractBTS.transactionCount(); 
     const transactionCount = tCount.toNumber();
     const tSold = await contractBTS.tokensSold();
     const tokensSold = window.web3.utils.fromWei(tSold, 'ether');
-    const ethPrice = await contractBTS.getETHPrice();
-    const ethPriceN = ethPrice.toNumber();
+    
+    // Soemthing is wrong getETHPrice function ?? 
+    // const ethPrice = await contractBTS.getETHPrice();
+   // const ethPriceN = ethPrice.toNumber();
 
     const transactions = [];
     var j = 0; 
@@ -36,7 +39,7 @@ const loadVariables = async (contractBTS) => {
         j++;
         transactions.push(t); 
     }
-    return { ethFunds, transactionCount, tokensSold, ethPriceN, transactions };
+    return { ethFunds, transactionCount, tokensSold, transactions };
 }
 
 
