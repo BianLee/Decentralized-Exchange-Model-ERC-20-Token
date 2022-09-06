@@ -21,7 +21,14 @@ class App extends React.Component {
         this.connectWallet = this.connectWallet.bind(this);
         this.ethChange = this.ethChange.bind(this);
         this.bianchange = this.bianChange.bind(this); 
+        this.initiateTransaction = this.initiateTransaction.bind(this); 
     }
+
+    initiateTransaction(e) {
+    
+    }
+
+    
 
     ethChange(e) {
       console.log(e);
@@ -97,13 +104,20 @@ class App extends React.Component {
           <p><b>Your Address</b>: {this.state.account}</p>
           <button onClick={this.connectWallet}>Connect Wallet</button> 
           <br/><br/><br/><h2>ETH → BIAN</h2>
-          <p>Reserve: {this.state.amountOfEth} ETH, {this.state.amountOfBian} BIAN
-            <br/>Constant k: 31.5
+          <p>Liquidity Pool Reserve: {this.state.amountOfEth} ETH, {this.state.amountOfBian} BIAN
+            <br/>Market Price: {this.state.amountOfEth / this.state.amountOfBian} ETH per BIAN
+            <br/>Market Price: {this.state.amountOfBian / this.state.amountOfEth} BIAN per ETH
+            <br/>Constant k: {this.state.amountOfBian * this.state.amountOfEth}
           </p>
           <br/>
-          Deposit ETH: <input value={this.state.ethInputValue} onChange={e => this.ethChange(e.target.value)}/><br/><br/>
+          Input ETH: <input value={this.state.ethInputValue} onChange={e => this.ethChange(e.target.value)}/><br/><br/>
           Receive BIAN: {this.state.bianReceiveValue}
-        </center>
+          <br/><br/><b>Price</b>:  
+          {this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> {this.state.ethInputValue / this.state.bianReceiveValue} ETH per BIAN </>}
+          <br/>{this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> or {this.state.bianReceiveValue/ this.state.ethInputValue} BIAN per ETH </>}
+          <br/><br/><button onClick={this.initiateTransaction}>Confirm Transaction</button>
+          </center>
+          
       </>
     )
   }
