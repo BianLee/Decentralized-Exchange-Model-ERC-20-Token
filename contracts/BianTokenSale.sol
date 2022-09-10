@@ -1,14 +1,16 @@
 // SPDX-License-Identifier: MIT
-pragma solidity 0.8.16; 
+pragma solidity ^0.8.16; 
 
 import './BianToken.sol';
-import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol"; 
+import "@chainlink/contracts/src/v0.8/interfaces/AggregatorV3Interface.sol";
+import "@openzeppelin/contracts/utils/Strings.sol";
+
 
 
 contract BianTokenSale {
     address payable public admin;
     // ethFunds is like the reserve ?? 
-    address payable private ethFunds = payable(0x74C0F91422412949Dc63f8721Fd53B280A36a368);
+    address payable private ethFunds = payable(address(this));
     BianToken public token;
     uint256 public tokensSold; 
     int public tokenPriceUSD;
@@ -43,9 +45,15 @@ contract BianTokenSale {
         return tokenPriceUSD / ethPrice;
     }
 
+    function getBianBalance() public view returns(string memory) {
+        return Strings.toString(IERC20(address(token)).balanceOf(address(this))); 
+    }
+
+
+
     function buyToken(uint256 _amount) public payable {
-        int bianTokenPriceETH = bianTokenPriceInETH();
-        require(int(msg.value) >= bianTokenPriceETH * int(_amount)); 
+        // int bianTokenPriceETH = bianTokenPriceInETH();
+        // require(int(msg.value) >= bianTokenPriceETH * int(_amount)); 
         require(token.balanceOf(address(this)) >= _amount);
        
         // OpenZeppelin transfer() function is defined as follows:
@@ -79,5 +87,8 @@ contract BianTokenSale {
         selfdestruct(payable(admin));
     }
 
+    receive() external payable {
+
+    }
 
 }
