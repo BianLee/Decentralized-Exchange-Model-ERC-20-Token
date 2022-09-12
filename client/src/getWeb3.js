@@ -23,6 +23,10 @@ export const load = async() => {
     const { ethFunds, bianFunds, transactionCount, tokensSold, ethPriceN, transactions } = await loadVariables(contractBT, contractBTS);
     const bal = await contractBT.balanceOf(account); //balance on buyer's account (what's the unit?)
     const myBT = bal / 10**18;
+
+   
+
+
     return {account, contractBTS, contractBT, ethFunds, bianFunds, transactionCount, tokensSold, transactions, myBT};
 }
 
@@ -33,13 +37,15 @@ const loadVariables = async (contractBT, contractBTS) => {
 
    
 
-
+    /* 
     const tempAddress = contractBTS.address; 
     // Getting balance of BIAN tokens in Token Sale Contract
     const bianFunds = await contractBTS.getBianBalance() / 10**18; 
     const temp = await window.web3.eth.getBalance(tempAddress);
     // Getting balance of ETH tokens in Token Sale Contract
-    const ethFunds = window.web3.utils.fromWei(temp, 'ether'); 
+    const ethFunds = window.web3.utils.fromWei(temp, 'ether');
+    */ 
+
     const tCount = await contractBTS.transactionCount(); 
     const transactionCount = tCount.toNumber();
     const tSold = await contractBTS.tokensSold();
@@ -60,7 +66,7 @@ const loadVariables = async (contractBT, contractBTS) => {
         j++;
         transactions.push(t); 
     }
-    return { ethFunds, bianFunds, transactionCount, tokensSold, transactions  };
+    return {transactionCount, tokensSold, transactions  };
 }
 
 
@@ -90,6 +96,7 @@ const loadContracts = async () => {
 
 const loadAccount = async () => {
     const account = window.web3.eth.getCoinbase();
+    
     return account;
 }
 

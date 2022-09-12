@@ -45,38 +45,59 @@ contract BianTokenSale {
         return tokenPriceUSD / ethPrice;
     }
 
+    function getETHBalance() public view returns(uint256) {
+        return address(this).balance; 
+    }
+
     function getBianBalance() public view returns(string memory) {
         return Strings.toString(IERC20(address(token)).balanceOf(address(this))); 
     }
 
-
-
+    // ETH --> BIAN
     function buyToken(uint256 _amount) public payable {
         // int bianTokenPriceETH = bianTokenPriceInETH();
         // require(int(msg.value) >= bianTokenPriceETH * int(_amount)); 
         require(token.balanceOf(address(this)) >= _amount);
        
-        // OpenZeppelin transfer() function is defined as follows:
-        /* 
-            function transfer(address to, uint256 amount) public virtual override returns (bool) {
-
-            } 
-
-
-
-        */ 
-
-        // following needs to be true.
-
-        // buyer receiving token from buyer? 
+        // buyer receiving token from vault? 
         require(token.transfer(msg.sender, _amount));
-        
-        // vault receiving eth from buyer? 
+        // transfer the ETH of the buyer to us. 
         ethFunds.transfer(msg.value);
+
         tokensSold += _amount; 
         transaction[transactionCount] = Transaction(msg.sender, _amount);
         transactionCount++;
         emit Sell(msg.sender, _amount); 
+    }
+
+    function approveAddress(uint256 _amount) public {
+        token.approve(msg.sender, _amount); 
+    }
+
+
+
+    // BIAN --> ETH
+    function buyETHWithBian(uint256 _bianInput, uint256 _ethReceive) public payable {
+       
+        // token.approve(address(this), _bianInput);
+        token.transferFrom(msg.sender, address(this), _bianInput);
+        address payable receiver = payable(msg.sender);
+        receiver.transfer(_ethReceive); 
+
+
+       /* 
+     // int bianTokenPriceETH = bianTokenPriceInETH();
+        // require(int(msg.value) >= bianTokenPriceETH * int(_amount)); 
+   
+        // IERC20(token).transferFrom(msg.sender, address(this), _amount);
+        token.approve(msg.sender, msg.value); 
+        token.transferFrom(msg.sender, address(this), msg.value); 
+        require(_amount > 0); 
+        // require(token.transfer(address(this), msg.value)); 
+        // ethFunds.transfer(msg.sender, _amount); 
+    */ 
+
+
     }
 
     function endSale() public {

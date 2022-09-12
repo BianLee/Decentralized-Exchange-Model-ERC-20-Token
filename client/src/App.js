@@ -2,6 +2,7 @@
 
 import React from "react"
 import { load } from "./getWeb3"; 
+import { getLiquidity } from "./getLiquidity"; 
 
 class App extends React.Component {
 
@@ -25,10 +26,20 @@ class App extends React.Component {
         this.connectWallet = this.connectWallet.bind(this);
         this.ethChange = this.ethChange.bind(this);
         this.bianchange = this.bianChange.bind(this); 
-        this.initiateTransaction = this.initiateTransaction.bind(this); 
+        this.initiateTransactionETHToBIAN = this.initiateTransactionETHToBIAN.bind(this); 
     }
 
-    initiateTransaction = async() => {
+
+    componentDidMount = async() => {
+      const { ethFunds, bianFunds } = await getLiquidity(); 
+      this.setState({
+        amountOfEth: parseFloat(ethFunds), 
+        amountOfBian: parseFloat(bianFunds), 
+      })
+    }
+
+
+    initiateTransactionETHToBIAN = async() => {
       console.log(this.state.account); 
       const big = BigInt(this.state.bianReceiveValue * 10**18);
       console.log(this.state.account); 
@@ -37,19 +48,54 @@ class App extends React.Component {
         value: this.state.ethInputValue * 10**18, 
         gas: 500000
       })
+    }
 
+    initiateTransactionBIANToETH = async() => {
+      console.log(this.state.account); 
+     
+      const bianInput = BigInt(parseInt(this.state.bianInputValue * 10**18));
+      console.log(bianInput); 
+      const ethReceive = BigInt(parseInt(this.state.ethReceiveValue * 10**18));
+      console.log("pe"); 
+      await this.state.contractBT.approve(this.state.contractBTS.address, bianInput, {
+        from: this.state.account,
+        value: 0,
+        gas: 500000
+      }); 
+      console.log("asdfasdfasdfasdf"); 
+
+      
+      await this.state.contractBTS.buyETHWithBian(bianInput, ethReceive, {
+        from: this.state.account,
+        value: 0,
+        gas: 500000
+      }); 
+      console.log("bbbbbb"); 
+      
+   
+
+
+      /* 
+      const big = BigInt(parseInt(this.state.ethReceiveValue * 10**18));
+      console.log("This is being called"); 
+      console.log(big); 
+      await this.state.contractBTS.buyETH(parseInt(this.state.bianInputValue * 10**18), {
+        from: this.state.account,
+        value: big,
+        gas: 50000
+      })
+      */ 
     }
 
     
-
     ethChange(e) {
       console.log(e);
       let y;
       console.log(this.state.amountOfBian); 
       if (e != "") {
-        
+        const k = this.state.amountOfBian * this.state.amountOfEth 
         // console.log(this.state.amountOfEth + parseFloat(e));
-        y = this.state.amountOfBian - (31.5 / (this.state.amountOfEth + parseFloat(e))) 
+        y = this.state.amountOfBian - (k / (this.state.amountOfEth + parseFloat(e))) 
       }
       console.log(y); 
       this.setState({
@@ -76,7 +122,8 @@ class App extends React.Component {
       let y;
       console.log(this.state.amountOfEth);
       if (e != "") {
-        y = this.state.amountOfEth - (31.5 / (this.state.amountOfBian + parseFloat(e)))
+        const k = this.state.amountOfBian * this.state.amountOfEth 
+        y = this.state.amountOfEth - (k / (this.state.amountOfBian + parseFloat(e)))
       }
       console.log(y); 
       this.setState({
@@ -87,15 +134,15 @@ class App extends React.Component {
 
     
     async connectWallet() {
-        const {account, contractBTS, contractBT, ethFunds, bianFunds, transactionCount, tokensSold, transactions, myBT} = await load(); 
+        const {account, contractBTS, contractBT, transactionCount, tokensSold, transactions, myBT} = await load(); 
         // console.log(account);
         // console.log(ethFunds); 
         // console.log(bianFunds); 
         
         this.setState({
             account: account,
-            amountOfEth: parseFloat(ethFunds), 
-            amountOfBian: parseFloat(bianFunds), 
+            contractBT: contractBT, 
+         
             tokenContractAddress: contractBT.address, 
             tokenSaleContractAddress: contractBTS.address,
             contractBTS: contractBTS
@@ -141,7 +188,7 @@ class App extends React.Component {
           <br/><br/><b>Price</b>:  
           {this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> {this.state.ethInputValue / this.state.bianReceiveValue} ETH per BIAN </>}
           <br/>{this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> or {this.state.bianReceiveValue/ this.state.ethInputValue} BIAN per ETH </>}
-          <br/><br/><button onClick={this.initiateTransaction}>Confirm Transaction</button>
+          <br/><br/><button onClick={this.initiateTransactionETHToBIAN}>Confirm Transaction</button>
           <br/><br/><br/><hr/><h2>BIAN → ETH</h2>
           <p>Liquidity Pool Reserve: {this.state.amountOfEth} ETH, {this.state.amountOfBian} BIAN
             {/* <br/>Market Price: {this.state.amountOfEth / this.state.amountOfBian} ETH per BIAN
@@ -154,7 +201,7 @@ class App extends React.Component {
           <br/><br/><b>Price</b>:
           {this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> {this.state.bianInputValue / this.state.ethReceiveValue} BIAN per ETH </>}
           <br/>{this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> or {this.state.ethReceiveValue/ this.state.bianInputValue} ETH per BIAN </>}
-          <br/><br/><button onClick={this.initiateTransaction}>Confirm Transaction</button>
+          <br/><br/><button onClick={this.initiateTransactionBIANToETH}>Confirm Transaction</button>
           </center>
           
       </>
