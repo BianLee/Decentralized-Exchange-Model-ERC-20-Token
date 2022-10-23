@@ -5,18 +5,7 @@ const contract = require('@truffle/contract');
 
 export const load = async() => {
 
-    //get first account running the sale contract (?)
-
-
-
-
-
     await loadWeb3();
-
-   //  console.log(window.web3.eth.defaultAccount);
-   // console.log(account1); 
-
-
 
     const account = await loadAccount(); 
     const { contractBT, contractBTS } = await loadContracts(); 
@@ -78,6 +67,9 @@ const loadVariables = async (contractBT, contractBTS) => {
 const loadContracts = async () => { 
     const BTContract = contract(BianToken); 
     BTContract.setProvider(window.web3.currentProvider);
+
+    
+    
     const BTSContract = contract(BianTokenSale);
     BTSContract.setProvider(window.web3.currentProvider);
 

@@ -2,7 +2,9 @@
 
 import React from "react"
 import { load } from "./getWeb3"; 
-import { getLiquidity } from "./getLiquidity"; 
+// import { getLiquidity } from "./getLiquidity"; 
+import { getBianTokenBalance } from "./getBianTokenBalance";
+import { getETHBalance } from "./getETHBalance"; 
 
 class App extends React.Component {
 
@@ -31,10 +33,14 @@ class App extends React.Component {
 
 
     componentDidMount = async() => {
-      const { ethFunds, bianFunds } = await getLiquidity(); 
+      // const { ethFunds } = await getLiquidity();
+      const ethFunds = await getETHBalance(); 
+      const format = await getBianTokenBalance(); 
+     
+     
       this.setState({
         amountOfEth: parseFloat(ethFunds), 
-        amountOfBian: parseFloat(bianFunds), 
+        amountOfBian: parseFloat(format), 
       })
     }
 
@@ -42,11 +48,20 @@ class App extends React.Component {
     initiateTransactionETHToBIAN = async() => {
       console.log(this.state.account); 
       const big = BigInt(this.state.bianReceiveValue * 10**18);
-      console.log(this.state.account); 
+      console.log(this.state.account);
+      console.log(this.state.contractBTS.address)
+      await this.state.contractBT.approve(this.state.contractBTS.address, big, {
+        from: this.state.account,
+        value: 0,
+        gas: 6000000
+
+      });
+      console.log("cait"); 
       await this.state.contractBTS.buyToken(big, {
         from: this.state.account, 
         value: this.state.ethInputValue * 10**18, 
-        gas: 500000
+        gas: 6000000
+
       })
     }
 
@@ -60,7 +75,8 @@ class App extends React.Component {
       await this.state.contractBT.approve(this.state.contractBTS.address, bianInput, {
         from: this.state.account,
         value: 0,
-        gas: 500000
+        gas: 6000000
+
       }); 
       console.log("asdfasdfasdfasdf"); 
 
@@ -202,6 +218,15 @@ class App extends React.Component {
           {this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> {this.state.bianInputValue / this.state.ethReceiveValue} BIAN per ETH </>}
           <br/>{this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> or {this.state.ethReceiveValue/ this.state.bianInputValue} ETH per BIAN </>}
           <br/><br/><button onClick={this.initiateTransactionBIANToETH}>Confirm Transaction</button>
+
+          <br/><br/> <hr/>
+          <h2>Become a liquidity provider</h2>
+          <p>Liquidity providers receive certain percentage of the total transaction fees (0.3%) in LP token forms.
+            <br/>Send both $ETH and $BIAN to Token Sale Contract Address in order to become a liquidity provider.
+            <br/><br/>
+          </p>
+            
+          
           </center>
           
       </>

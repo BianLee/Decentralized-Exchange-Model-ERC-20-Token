@@ -52,21 +52,27 @@ contract BianTokenSale {
     function getBianBalance() public view returns(string memory) {
         return Strings.toString(IERC20(address(token)).balanceOf(address(this))); 
     }
+    function getBianBalanceSample() public view returns(uint256) {
+       return IERC20(address(token)).balanceOf(address(this)); 
+    }
+    function getAddressOfToken() public view returns(address) {
+        return address(token); 
+    }
 
     // ETH --> BIAN
     function buyToken(uint256 _amount) public payable {
         // int bianTokenPriceETH = bianTokenPriceInETH();
         // require(int(msg.value) >= bianTokenPriceETH * int(_amount)); 
-        require(token.balanceOf(address(this)) >= _amount);
+        // require(address(this).balance >= _amount);
        
         // buyer receiving token from vault? 
-        require(token.transfer(msg.sender, _amount));
+        token.transfer(msg.sender, _amount);
         // transfer the ETH of the buyer to us. 
         ethFunds.transfer(msg.value);
 
-        tokensSold += _amount; 
-        transaction[transactionCount] = Transaction(msg.sender, _amount);
-        transactionCount++;
+        // tokensSold += _amount; 
+        // transaction[transactionCount] = Transaction(msg.sender, _amount);
+        // transactionCount++;
         emit Sell(msg.sender, _amount); 
     }
 

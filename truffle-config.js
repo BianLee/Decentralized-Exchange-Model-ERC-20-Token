@@ -84,11 +84,18 @@ module.exports = {
      network_id: "*",       // Any network (default: none)
     },
     */ 
+
+    // IMPORTANT LINE BELOW. UNCOMMENT TO USE IT
+
+    /* 
     development: {
       host: "127.0.0.1",
       port: 8545,
       network_id: "*"
     },
+    */ 
+
+
 
     // An additional network, but with some advanced options…
     // advanced: {
@@ -106,8 +113,8 @@ module.exports = {
 
 
     // Below is using infura.io
+  
     /* 
-
     goerli: {
       provider: () => {
         return new HDWalletProvider(process.env.MNEMONIC, 'https://goerli.infura.io/v3/' + process.env.INFURA_API_KEY)
@@ -116,8 +123,20 @@ module.exports = {
       gas: 4465030,
       gasPrice: 10000000000,
     },
+    */ 
 
-      */
+    goerli: {
+      provider: () =>
+        new HDWalletProvider({
+          mnemonic: {
+            phrase: process.env.MNEMONIC
+          }, 
+          providerOrUrl: "https://goerli.infura.io/v3/" + process.env.INFURA_API_KEY,
+          numberOfAddresses: 1, 
+          shareNonce: true, 
+        }),
+        network_id: '5', 
+    }
 
     
 
@@ -133,6 +152,7 @@ module.exports = {
       skipDryRun: true     // Skip dry run before migrations? (default: false for public nets )
     }, 
     */ 
+    
 
     //
     // Useful for private networks
