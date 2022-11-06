@@ -1,5 +1,6 @@
 require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider');
+const PrivateKeyProvider = require("truffle-privatekey-provider");
 
 /* 
 const privateKeys = [
@@ -124,7 +125,20 @@ module.exports = {
       gasPrice: 10000000000,
     },
     */ 
+  
+      mainnet: {
+        provider: function() {
+          return new HDWalletProvider(process.env.PRIVATE_KEYS, 'https://mainnet.infura.io/v3/' + process.env.INFURA_API_KEY)
+        },      
+        gas: 4465030,
+        gasPrice: 10000000000,
+        network_id: 1
+      }
+      
+    
 
+
+    /* 
     goerli: {
       provider: () =>
         new HDWalletProvider({
@@ -137,6 +151,7 @@ module.exports = {
         }),
         network_id: '5', 
     }
+    */ 
 
     
 

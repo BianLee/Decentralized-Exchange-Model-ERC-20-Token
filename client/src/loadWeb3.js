@@ -41,6 +41,3 @@ export function approveBTS(amount) {
     })
 }
 
-export function getAccount() {
-    return { account }; 
-}

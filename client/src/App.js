@@ -52,10 +52,10 @@ class App extends React.Component {
 
 
     initiateTransactionETHToBIAN = async() => {
-      console.log(this.state.account); 
+      // console.log(this.state.account); 
       const big = BigInt(this.state.bianReceiveValue * 10**18);
-      console.log(this.state.account);
-      console.log(this.state.contractBTS.address)
+      // console.log(this.state.account);
+      // console.log(this.state.contractBTS.address)
       await approveBTS;
       await buyTokenFunction(big, this.state.ethInputValue * 10**18);
 
@@ -164,7 +164,7 @@ class App extends React.Component {
         
         this.setState({
             account: account,
-            contractBT: contractBT, 
+            // contractBT: contractBT, 
             /* tokenContractAddress: contractBT.address, 
             tokenSaleContractAddress: contractBTS.address,
             contractBTS: contractBTS */ 
