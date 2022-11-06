@@ -73,7 +73,7 @@ contract BianTokenSale {
         // tokensSold += _amount; 
         // transaction[transactionCount] = Transaction(msg.sender, _amount);
         // transactionCount++;
-        emit Sell(msg.sender, _amount); 
+        emit Sell(msg.sender, _amount);
     }
 
     function approveAddress(uint256 _amount) public {

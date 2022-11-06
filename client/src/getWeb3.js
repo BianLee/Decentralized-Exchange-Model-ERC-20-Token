@@ -74,7 +74,9 @@ const loadContracts = async () => {
     BTSContract.setProvider(window.web3.currentProvider);
 
     const contractBT = await BTContract.deployed();
-    const contractBTS = await BTSContract.deployed(); 
+    const contractBTS = await BTSContract.deployed();
+    
+
 
 
     

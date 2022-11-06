@@ -29,18 +29,11 @@ const balanceOfABI = [
 ];
 
 
-// const account = web3.eth.getCoinbase();
-const account = web3.eth.getCoinbase();
-const contract = new web3.eth.Contract(balanceOfABI, tokenContract)
 
-
-
-export function approveBTS(amount) {
-    contract.methods.approve("0x3e3cBFAA2d0e475A5109Bc325b72C07E66c3d8dD", amount).send({
-        from: account
-    })
+export const getAccount = async() => {
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    var account = accounts[0]
+    return { account } ;
 }
 
-export function getAccount() {
-    return { account }; 
-}
+

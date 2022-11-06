@@ -5,6 +5,12 @@ import { load } from "./getWeb3";
 // import { getLiquidity } from "./getLiquidity"; 
 import { getBianTokenBalance } from "./getBianTokenBalance";
 import { getETHBalance } from "./getETHBalance"; 
+import { approveBTS } from "./loadWeb3";
+import { getAccount } from "./getAccount"
+import { buyTokenFunction } from "./buyBian" 
+import { buyETHFunction } from "./buyETH" 
+
+import "./App.css"
 
 class App extends React.Component {
 
@@ -50,19 +56,25 @@ class App extends React.Component {
       const big = BigInt(this.state.bianReceiveValue * 10**18);
       console.log(this.state.account);
       console.log(this.state.contractBTS.address)
+      await approveBTS;
+      await buyTokenFunction(big, this.state.ethInputValue * 10**18);
+
+      /* 
       await this.state.contractBT.approve(this.state.contractBTS.address, big, {
         from: this.state.account,
         value: 0,
         gas: 6000000
 
       });
-      console.log("cait"); 
+      */
+/* 
       await this.state.contractBTS.buyToken(big, {
         from: this.state.account, 
         value: this.state.ethInputValue * 10**18, 
         gas: 6000000
 
       })
+      */ 
     }
 
     initiateTransactionBIANToETH = async() => {
@@ -72,23 +84,17 @@ class App extends React.Component {
       console.log(bianInput); 
       const ethReceive = BigInt(parseInt(this.state.ethReceiveValue * 10**18));
       console.log("pe"); 
-      await this.state.contractBT.approve(this.state.contractBTS.address, bianInput, {
-        from: this.state.account,
-        value: 0,
-        gas: 6000000
 
-      }); 
-      console.log("asdfasdfasdfasdf"); 
+      await approveBTS;
+      await buyETHFunction(bianInput, ethReceive); 
 
-      
+      /* 
       await this.state.contractBTS.buyETHWithBian(bianInput, ethReceive, {
         from: this.state.account,
         value: 0,
         gas: 500000
       }); 
-      console.log("bbbbbb"); 
-      
-   
+      */ 
 
 
       /* 
@@ -150,7 +156,8 @@ class App extends React.Component {
 
     
     async connectWallet() {
-        const {account, contractBTS, contractBT, transactionCount, tokensSold, transactions, myBT} = await load(); 
+        const {account} = await getAccount(); 
+        const {contractBTS, contractBT, transactionCount, tokensSold, transactions, myBT} = await load(); 
         // console.log(account);
         // console.log(ethFunds); 
         // console.log(bianFunds); 
@@ -158,10 +165,9 @@ class App extends React.Component {
         this.setState({
             account: account,
             contractBT: contractBT, 
-         
-            tokenContractAddress: contractBT.address, 
+            /* tokenContractAddress: contractBT.address, 
             tokenSaleContractAddress: contractBTS.address,
-            contractBTS: contractBTS
+            contractBTS: contractBTS */ 
         })
     }
 
@@ -178,20 +184,23 @@ class App extends React.Component {
     return (
       <>
         <center>
-          <h1>BianTokenDEX</h1>
-          <p>
-            {/* <b>Admin (Contract Creator) Address</b>: {this.state.admin} */} 
-            <b>Token Contract Address</b>: {this.state.tokenContractAddress} 
-            <br/><b>Token Symbol</b>: BIAN
-            <br/><b>Token Decimal</b>: 18
-            <br/><br/><b>Token Sale Contract Address</b>: {this.state.tokenSaleContractAddress}
-          </p>
+            <h1 style={{fontSize: "40px", color: "#CE1126", }}>BianDEX</h1>
+            <p style={{marginTop: "-15px" }}>Decentralized exchange (DEX) for BianToken (<i>$BIAN</i>) running on Ethereum blockchain</p>
           
+             {/* <b>Admin (Contract Creator) Address</b>: {this.state.admin} */} 
+              <b>$BIAN Token Contract Address</b>: 0x861A87be2F0b630e1da20b49065eFa4554f4514b
+              {/* {this.state.tokenContractAddress} */} 
+              {/* <br/><b>Token Symbol</b>: BIAN
+              <br/><b>Token Decimal</b>: 18 */} 
+              <br/><b>BianDex Sale Contract Address</b>: 0x3e3cBFAA2d0e475A5109Bc325b72C07E66c3d8dD
+              {/* {this.state.tokenSaleContractAddress} */}
+            
+     
           
-          <p><b>Your Address</b>: {this.state.account}</p>
-          <button onClick={this.connectWallet}>Connect Wallet</button> 
-          
-          <br/><br/><br/><hr/><h2>ETH → BIAN</h2>
+
+          {this.state.account.length == 0 ? <><br/><br/><button style={{backgroundColor: "#14213D", border: "none", color: "white", borderRadius: "2px", padding: "10px"}} onClick={this.connectWallet}>Connect Metamask Wallet</button><br/><br/></>: 
+          <><b><br/><br/><button style={{backgroundColor: "#14213D", borderColor: "#14213D", border: "solid", color: "white", borderRadius: "2px", padding: "10px"}}>{this.state.account}</button><br/><br/></b></>}
+          <hr/><h2>ETH → BIAN</h2>
           <p>Liquidity Pool Reserve: {this.state.amountOfEth} ETH, {this.state.amountOfBian} BIAN
             {/* <br/>Market Price: {this.state.amountOfEth / this.state.amountOfBian} ETH per BIAN
             <br/>Market Price: {this.state.amountOfBian / this.state.amountOfEth} BIAN per ETH */} 
@@ -220,7 +229,7 @@ class App extends React.Component {
           <br/><br/><button onClick={this.initiateTransactionBIANToETH}>Confirm Transaction</button>
 
           <br/><br/> <hr/>
-          <h2>Become a liquidity provider</h2>
+          <h2>Become a liquidity provider (Beta)</h2>
           <p>Liquidity providers receive certain percentage of the total transaction fees (0.3%) in LP token forms.
             <br/>Send both $ETH and $BIAN to Token Sale Contract Address in order to become a liquidity provider.
             <br/><br/>
