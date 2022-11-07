@@ -192,18 +192,24 @@ class App extends React.Component {
     return (
       <>
         <center>
-            <h1 style={{fontSize: "40px", color: "#CE1126", }}>BianDEX</h1>
-            <p style={{marginTop: "-15px" }}>Decentralized exchange (DEX) for BianToken (<i>$BIAN</i>) running on Ethereum blockchain</p>
-          
-             {/* <b>Admin (Contract Creator) Address</b>: {this.state.admin} */} 
-              <b>$BIAN Token Contract Address</b>: 0x586a03aD8E72FC30af0177Ec73Cac88C7816110b
-              {/* {this.state.tokenContractAddress} */} 
-              {/* <br/><b>Token Symbol</b>: BIAN
-              <br/><b>Token Decimal</b>: 18 */} 
-              <br/><b>BianDex Sale Contract Address</b>: 0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1
-              {/* {this.state.tokenSaleContractAddress} */}
+            <h1 style={{fontSize: "60px", color: "#CE1126", }}>BianDEX</h1>
             
-     
+            <div className="rectangle">
+              <p style={{marginTop: "-15px" }}>
+                BianDEX is a feeless decentralized exchange (DEX) that runs on the Ethereum blockchain. 
+                BianToken (<i>$BIAN</i>) is an ERC-20 token with a fixed supply of only 326. Unlike other exchanges,
+                we do not take any percentage cuts from transactions; A user only pays gas fee with no extra transaction fees. Let's take $BIAN to the moon!
+              </p>
+            </div>
+              
+          {/*
+
+              <b>$BIAN Token Contract Address</b>: 0x586a03aD8E72FC30af0177Ec73Cac88C7816110b
+              <br/><b>BianDex Contract Address</b>: 0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1
+          
+          */} 
+            
+          
           
 
           {this.state.account.length == 0 ? <><br/><br/><button style={{backgroundColor: "#14213D", border: "none", color: "white", borderRadius: "2px", padding: "10px"}} onClick={this.connectWallet}>Connect Metamask Wallet</button><br/><br/></>: 
