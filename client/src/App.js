@@ -28,7 +28,8 @@ class App extends React.Component {
             bianInputValue: 0,
             bianReceiveValue: 0, 
             contractBTS: {}, 
-            contractBT:  {}, 
+            contractBT:  {},
+            tempETHValue: 2, 
 
         }
         this.connectWallet = this.connectWallet.bind(this);
@@ -40,12 +41,15 @@ class App extends React.Component {
 
     componentDidMount = async() => {
       // const { ethFunds } = await getLiquidity();
-      const ethFunds = await getETHBalance(); 
-      const format = await getBianTokenBalance(); 
+      const ethFunds = await getETHBalance();
+      console.log(ethFunds);
+      const format = await getBianTokenBalance();
+
+      // const format = await getBianTokenBalance(); 
      
      
       this.setState({
-        amountOfEth: parseFloat(ethFunds), 
+        amountOfEth: parseFloat(ethFunds),
         amountOfBian: parseFloat(format), 
       })
     }
@@ -56,7 +60,8 @@ class App extends React.Component {
       const big = BigInt(this.state.bianReceiveValue * 10**18);
       // console.log(this.state.account);
       // console.log(this.state.contractBTS.address)
-      await approveBTS;
+      // await approveBTS;
+      await approveBTS
       await buyTokenFunction(big, this.state.ethInputValue * 10**18);
 
       /* 
@@ -85,7 +90,10 @@ class App extends React.Component {
       const ethReceive = BigInt(parseInt(this.state.ethReceiveValue * 10**18));
       console.log("pe"); 
 
-      await approveBTS;
+      await approveBTS(bianInput);
+
+     console.log("hahahahahah");
+
       await buyETHFunction(bianInput, ethReceive); 
 
       /* 
@@ -188,11 +196,11 @@ class App extends React.Component {
             <p style={{marginTop: "-15px" }}>Decentralized exchange (DEX) for BianToken (<i>$BIAN</i>) running on Ethereum blockchain</p>
           
              {/* <b>Admin (Contract Creator) Address</b>: {this.state.admin} */} 
-              <b>$BIAN Token Contract Address</b>: 0x861A87be2F0b630e1da20b49065eFa4554f4514b
+              <b>$BIAN Token Contract Address</b>: 0x586a03aD8E72FC30af0177Ec73Cac88C7816110b
               {/* {this.state.tokenContractAddress} */} 
               {/* <br/><b>Token Symbol</b>: BIAN
               <br/><b>Token Decimal</b>: 18 */} 
-              <br/><b>BianDex Sale Contract Address</b>: 0x3e3cBFAA2d0e475A5109Bc325b72C07E66c3d8dD
+              <br/><b>BianDex Sale Contract Address</b>: 0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1
               {/* {this.state.tokenSaleContractAddress} */}
             
      

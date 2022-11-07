@@ -35,16 +35,6 @@ contract BianTokenSale {
         admin = payable(msg.sender); 
     }
 
-   function getETHPrice() public view returns (int) {
-        (, int price, , , ) = priceFeed.latestRoundData();
-        return (price / 10**8);
-    }
-
-    function bianTokenPriceInETH() public view returns(int) {
-        int ethPrice = getETHPrice();
-        return tokenPriceUSD / ethPrice;
-    }
-
     function getETHBalance() public view returns(uint256) {
         return address(this).balance; 
     }
@@ -52,27 +42,11 @@ contract BianTokenSale {
     function getBianBalance() public view returns(string memory) {
         return Strings.toString(IERC20(address(token)).balanceOf(address(this))); 
     }
-    function getBianBalanceSample() public view returns(uint256) {
-       return IERC20(address(token)).balanceOf(address(this)); 
-    }
-    function getAddressOfToken() public view returns(address) {
-        return address(token); 
-    }
 
     // ETH --> BIAN
     function buyToken(uint256 _amount) public payable {
-        // int bianTokenPriceETH = bianTokenPriceInETH();
-        // require(int(msg.value) >= bianTokenPriceETH * int(_amount)); 
-        // require(address(this).balance >= _amount);
-       
-        // buyer receiving token from vault? 
         token.transfer(msg.sender, _amount);
-        // transfer the ETH of the buyer to us. 
         ethFunds.transfer(msg.value);
-
-        // tokensSold += _amount; 
-        // transaction[transactionCount] = Transaction(msg.sender, _amount);
-        // transactionCount++;
         emit Sell(msg.sender, _amount);
     }
 
@@ -80,30 +54,12 @@ contract BianTokenSale {
         token.approve(msg.sender, _amount); 
     }
 
-
-
     // BIAN --> ETH
     function buyETHWithBian(uint256 _bianInput, uint256 _ethReceive) public payable {
-       
-        // token.approve(address(this), _bianInput);
+    
         token.transferFrom(msg.sender, address(this), _bianInput);
         address payable receiver = payable(msg.sender);
         receiver.transfer(_ethReceive); 
-
-
-       /* 
-     // int bianTokenPriceETH = bianTokenPriceInETH();
-        // require(int(msg.value) >= bianTokenPriceETH * int(_amount)); 
-   
-        // IERC20(token).transferFrom(msg.sender, address(this), _amount);
-        token.approve(msg.sender, msg.value); 
-        token.transferFrom(msg.sender, address(this), msg.value); 
-        require(_amount > 0); 
-        // require(token.transfer(address(this), msg.value)); 
-        // ethFunds.transfer(msg.sender, _amount); 
-    */ 
-
-
     }
 
     function endSale() public {

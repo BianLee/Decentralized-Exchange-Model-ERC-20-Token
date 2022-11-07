@@ -1,11 +1,9 @@
 const Web3 = require('web3');
-// const web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/7f36e75226334b0498ce7547dca2bc14'));
 const web3 = new Web3(window.web3.currentProvider); 
 
+// const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/7f36e75226334b0498ce7547dca2bc14'));
 
-const tokenContract = "0x861A87be2F0b630e1da20b49065eFa4554f4514b" 
-const tokenSaleContract = "0x3e3cBFAA2d0e475A5109Bc325b72C07E66c3d8dD"
-
+// Set the ERC-20 balanceOf() ABI
 const balanceOfABI = [
     {
         "constant": true,
@@ -26,18 +24,46 @@ const balanceOfABI = [
         "stateMutability": "view",
         "type": "function"
     },
+    {
+        "inputs": [
+            {
+                "name": "spender",
+                "type": "address"
+            },
+            {
+                "name": "amount",
+                "type": "uint256"
+            }
+        ],
+        "name": "approve",
+        "outputs": [
+        ],
+        "stateMutability": "view",
+        "type": "function"
+    }
 ];
 
+const tokenContract = "0x586a03aD8E72FC30af0177Ec73Cac88C7816110b"
+const tokenHolder = "0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1"
 
-// const account = web3.eth.getCoinbase();
-const account = web3.eth.getCoinbase();
-const contract = new web3.eth.Contract(balanceOfABI, tokenContract)
+export const approveBTS = async(amount) => {
+    
+    console.log("fuck you bitch")
+    const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
+    console.log(accounts[0])
+    // Define the ERC-20 token contract
+    const contract = new web3.eth.Contract(balanceOfABI, tokenContract)
+    // Execute balanceOf() to retrieve the token balance
+    await contract.methods.approve(tokenHolder, amount).send({
+        from: accounts[0],
+        value: 0
 
+    }); // 29803630997051883414242659
 
+    // Convert the value from Wei to Ether  
+    // const formattedResult = web3.utils.fromWei(result, "ether"); // 29803630.997051883414242659
+    
+    // console.log(formattedResult);
+    // return formattedResult
 
-export function approveBTS(amount) {
-    contract.methods.approve("0x3e3cBFAA2d0e475A5109Bc325b72C07E66c3d8dD", amount).send({
-        from: account
-    })
 }
-

@@ -2,12 +2,6 @@ require('dotenv').config()
 const HDWalletProvider = require('@truffle/hdwallet-provider');
 const PrivateKeyProvider = require("truffle-privatekey-provider");
 
-/* 
-const privateKeys = [
-  'be0cb4574f404df07da54825d13b62edbdf33a3aa356f190d16f56e85b28c916' 
-];
-*/ 
-
 /**
  * Use this file to configure your truffle project. It's seeded with some
  * common settings for different networks and features like migrations,
@@ -57,6 +51,10 @@ const privateKeys = [
 // const HDWalletProvider = require('@truffle/hdwallet-provider');
 
 module.exports = {
+  experiments: {
+    topLevelAwait: true,
+  },
+
 
   contracts_build_directory: './client/src/contracts', 
 
@@ -115,7 +113,7 @@ module.exports = {
 
     // Below is using infura.io
   
-    /* 
+    
     goerli: {
       provider: () => {
         return new HDWalletProvider(process.env.MNEMONIC, 'https://goerli.infura.io/v3/' + process.env.INFURA_API_KEY)
@@ -124,14 +122,14 @@ module.exports = {
       gas: 4465030,
       gasPrice: 10000000000,
     },
-    */ 
-  
+    
+
       mainnet: {
         provider: function() {
-          return new HDWalletProvider(process.env.PRIVATE_KEYS, 'https://mainnet.infura.io/v3/' + process.env.INFURA_API_KEY)
+          return new HDWalletProvider(process.env.MNEMONIC, 'https://mainnet.infura.io/v3/' + process.env.INFURA_API_KEY)
         },      
         gas: 4465030,
-        gasPrice: 10000000000,
+        gasPrice: 10557857772,
         network_id: 1
       }
       

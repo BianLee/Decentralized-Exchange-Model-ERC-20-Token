@@ -3,7 +3,7 @@ const web3 = new Web3(window.web3.currentProvider);
 // const web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/7f36e75226334b0498ce7547dca2bc14'));
 
 //const tokenContract = "0x861A87be2F0b630e1da20b49065eFa4554f4514b" 
-const tokenSaleContract = "0x3e3cBFAA2d0e475A5109Bc325b72C07E66c3d8dD"
+const tokenSaleContract = "0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1"
 
 const BianTokenSaleABI = [
         {
@@ -63,19 +63,6 @@ const BianTokenSaleABI = [
             "type": "function"
         },
         {
-            "inputs": [],
-            "name": "bianTokenPriceInETH",
-            "outputs": [
-                {
-                    "internalType": "int256",
-                    "name": "",
-                    "type": "int256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
             "inputs": [
                 {
                     "internalType": "uint256",
@@ -115,19 +102,6 @@ const BianTokenSaleABI = [
         },
         {
             "inputs": [],
-            "name": "getAddressOfToken",
-            "outputs": [
-                {
-                    "internalType": "address",
-                    "name": "",
-                    "type": "address"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
             "name": "getBianBalance",
             "outputs": [
                 {
@@ -141,38 +115,12 @@ const BianTokenSaleABI = [
         },
         {
             "inputs": [],
-            "name": "getBianBalanceSample",
-            "outputs": [
-                {
-                    "internalType": "uint256",
-                    "name": "",
-                    "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
             "name": "getETHBalance",
             "outputs": [
                 {
                     "internalType": "uint256",
                     "name": "",
                     "type": "uint256"
-                }
-            ],
-            "stateMutability": "view",
-            "type": "function"
-        },
-        {
-            "inputs": [],
-            "name": "getETHPrice",
-            "outputs": [
-                {
-                    "internalType": "int256",
-                    "name": "",
-                    "type": "int256"
                 }
             ],
             "stateMutability": "view",
@@ -268,7 +216,9 @@ export const buyETHFunction = async(bianInput, ethReceive) => {
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
 
     contract.methods.buyETHWithBian(bianInput, ethReceive).send({
-        from: accounts[0]
+        from: accounts[0],
+        gas: 210000
+       
     })
 
 
