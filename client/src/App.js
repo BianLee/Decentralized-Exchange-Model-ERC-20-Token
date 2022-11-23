@@ -196,6 +196,8 @@ class App extends React.Component {
             
             <div className="rectangle">
               <p style={{marginTop: "-15px" }}>
+                <mark>*This application is currently under development. You can expect better UI / styling in the future...
+                </mark>                <br/><br/> 
                 BianDEX is a feeless decentralized exchange (DEX) that runs on the Ethereum blockchain. 
                 BianToken (<i>$BIAN</i>) is an ERC-20 token with a fixed supply of only 326. This DEX is modeled after Uniswap, which uses the Automated Market Maker (AMM) system and constant product market maker model. Let's take $BIAN to the moon!
                 
