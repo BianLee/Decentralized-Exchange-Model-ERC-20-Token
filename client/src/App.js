@@ -197,17 +197,16 @@ class App extends React.Component {
             <div className="rectangle">
               <p style={{marginTop: "-15px" }}>
                 BianDEX is a feeless decentralized exchange (DEX) that runs on the Ethereum blockchain. 
-                BianToken (<i>$BIAN</i>) is an ERC-20 token with a fixed supply of only 326. Unlike other exchanges,
-                we do not take any percentage cuts from transactions; A user only pays gas fee with no extra transaction fees. Let's take $BIAN to the moon!
+                BianToken (<i>$BIAN</i>) is an ERC-20 token with a fixed supply of only 326. This DEX is modeled after Uniswap, which uses the Automated Market Maker (AMM) system and constant product market maker model. Let's take $BIAN to the moon!
+                
               </p>
             </div>
               
-          {/*
-
+          
+            <br/>
               <b>$BIAN Token Contract Address</b>: 0x586a03aD8E72FC30af0177Ec73Cac88C7816110b
               <br/><b>BianDex Contract Address</b>: 0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1
-          
-          */} 
+              <br/>
             
           
           
@@ -242,13 +241,16 @@ class App extends React.Component {
           <br/>{this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> or {this.state.ethReceiveValue/ this.state.bianInputValue} ETH per BIAN </>}
           <br/><br/><button onClick={this.initiateTransactionBIANToETH}>Confirm Transaction</button>
 
-          <br/><br/> <hr/>
+          <br/><br/> 
+
+          {/*
+          <hr/>
           <h2>Become a liquidity provider (Beta)</h2>
           <p>Liquidity providers receive certain percentage of the total transaction fees (0.3%) in LP token forms.
             <br/>Send both $ETH and $BIAN to Token Sale Contract Address in order to become a liquidity provider.
             <br/><br/>
           </p>
-            
+          \*/}
           
           </center>
           
