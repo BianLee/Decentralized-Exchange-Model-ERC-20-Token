@@ -192,7 +192,7 @@ class App extends React.Component {
     return (
       <>
         <center>
-            <h1 style={{fontSize: "60px", color: "#CE1126", }}>BianDEX</h1>
+            <h1 style={{fontSize: "60px", color: "#CE1126", }}>BianDEX for BIANToken</h1>
             
             <div className="rectangle">
               <p style={{marginTop: "-15px" }}>
