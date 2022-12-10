@@ -194,10 +194,10 @@ class App extends React.Component {
         <center>
         <div className="rectangle">
 
-        <h1 style={{fontSize: "65px", color: "#CE1126"}}>BianDEX for BIANToken.</h1>
+        <h1 className="headline" style={{color: "#CE1126"}}>BianDEX for BIANToken.</h1>
         <br/>
         <p style={{fontFamily: "Kanit", marginTop: "-20px", fontSize: "18px"}}>Bian Lee's experimental tokenomics project. $BIAN to the moon!</p>
-        <span style={{fontSize: "18px", lineHeight: "25px"}}>
+        <span style={{fontSize: "18px", lineHeight: "25px", wordWrap: "break-word"}}>
         BianDEX is a feeless decentralized exchange (DEX) that runs on the Ethereum blockchain. 
         BianToken (<i>$BIAN</i>) is an ERC-20 token with a fixed supply of 326. This DEX is based on the Automated Market Maker (AMM) system and constant product market maker model. I've spent more than $200 USD publishing smart contracts
         to the main Ethereum network (gas fees), and locking up initial ETH for respective amount of $BIAN. To get the project up and started, I'm willing to give out
