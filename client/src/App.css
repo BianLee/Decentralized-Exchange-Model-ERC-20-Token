@@ -8,11 +8,32 @@ h1 {
 
 .rectangle {
     width: 80%;
-    line-height: 120%;
+    vertical-align: top;
+    text-align: left;
+  
 }
+
+.inputVal {
+     padding: 4px 6px;
+    margin: 5px 0;
+    border: black;
+    border-style: solid;
+    border-width: 2px;
+}
+
+
+
+input:focus,
+select:focus,
+textarea:focus,
+button:focus {
+    outline: none;
+}
+
 
 @media only screen and (min-width: 1200px) {
     .rectangle {
-        width: 50%
+        width: 50%;
+
     }
 }

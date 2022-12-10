@@ -192,69 +192,66 @@ class App extends React.Component {
     return (
       <>
         <center>
-            <h1 style={{fontSize: "60px", color: "#CE1126", }}>BianDEX for BIANToken</h1>
-            
-            <div className="rectangle">
-              <p style={{marginTop: "-15px" }}>
-                <mark>*This application is currently under development. You can expect better UI / styling in the future...
-                </mark>                <br/><br/> 
-                BianDEX is a feeless decentralized exchange (DEX) that runs on the Ethereum blockchain. 
-                BianToken (<i>$BIAN</i>) is an ERC-20 token with a fixed supply of only 326 (cough cough birthday number). This DEX is modeled after Uniswap, which uses the Automated Market Maker (AMM) system and constant product market maker model. Let's take $BIAN to the moon!
-                
-              </p>
-            </div>
-              
-          
-            <br/>
-              <b>$BIAN Token Contract Address</b>: 0x586a03aD8E72FC30af0177Ec73Cac88C7816110b
-              <br/><b>BianDex Contract Address</b>: 0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1
-              <br/>
-            
-          
-          
+        <div className="rectangle">
 
-          {this.state.account.length == 0 ? <><br/><br/><button style={{backgroundColor: "#14213D", border: "none", color: "white", borderRadius: "2px", padding: "10px"}} onClick={this.connectWallet}>Connect Metamask Wallet</button><br/><br/></>: 
-          <><b><br/><br/><button style={{backgroundColor: "#14213D", borderColor: "#14213D", border: "solid", color: "white", borderRadius: "2px", padding: "10px"}}>{this.state.account}</button><br/><br/></b></>}
-          <hr/><h2>ETH → BIAN</h2>
-          <p>Liquidity Pool Reserve: {this.state.amountOfEth} ETH, {this.state.amountOfBian} BIAN
-            {/* <br/>Market Price: {this.state.amountOfEth / this.state.amountOfBian} ETH per BIAN
-            <br/>Market Price: {this.state.amountOfBian / this.state.amountOfEth} BIAN per ETH */} 
-            <br/>Constant k: {this.state.amountOfBian * this.state.amountOfEth}
-          </p>
-          <br/>
-          
-          Input ETH: <input value={this.state.ethInputValue} onChange={e => this.ethChange(e.target.value)}/><br/><br/>
-          Receive BIAN: {this.state.bianReceiveValue}
-          <br/><br/><b>Price</b>:  
-          {this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> {this.state.ethInputValue / this.state.bianReceiveValue} ETH per BIAN </>}
-          <br/>{this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> or {this.state.bianReceiveValue/ this.state.ethInputValue} BIAN per ETH </>}
-          <br/><br/><button onClick={this.initiateTransactionETHToBIAN}>Confirm Transaction (Buy $BIAN)</button>
-          <br/><br/><br/><hr/><h2>BIAN → ETH</h2>
-          <p>Liquidity Pool Reserve: {this.state.amountOfEth} ETH, {this.state.amountOfBian} BIAN
-            {/* <br/>Market Price: {this.state.amountOfEth / this.state.amountOfBian} ETH per BIAN
-            <br/>Market Price: {this.state.amountOfBian / this.state.amountOfEth} BIAN per ETH */} 
-            <br/>Constant k: {this.state.amountOfBian * this.state.amountOfEth}
-          </p>
-          <br/>
-          Input BIAN: <input value={this.state.bianInputValue} onChange={e => this.bianChange(e.target.value)}/><br/><br/>
-          Receive ETH: {this.state.ethReceiveValue}
-          <br/><br/><b>Price</b>:
-          {this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> {this.state.bianInputValue / this.state.ethReceiveValue} BIAN per ETH </>}
-          <br/>{this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> or {this.state.ethReceiveValue/ this.state.bianInputValue} ETH per BIAN </>}
-          <br/><br/><button onClick={this.initiateTransactionBIANToETH}>Confirm Transaction (Buy $ETH)</button>
+        <h1 style={{fontSize: "65px", color: "#CE1126"}}>BianDEX for BIANToken.</h1>
+        <br/>
+        <p style={{fontFamily: "Kanit", marginTop: "-20px", fontSize: "18px"}}>Bian Lee's experimental tokenomics project. $BIAN to the moon!</p>
+        <span style={{fontSize: "18px", lineHeight: "25px"}}>
+        BianDEX is a feeless decentralized exchange (DEX) that runs on the Ethereum blockchain. 
+        BianToken (<i>$BIAN</i>) is an ERC-20 token with a fixed supply of 326. This DEX is based on the Automated Market Maker (AMM) system and constant product market maker model. I've spent more than $200 USD publishing smart contracts
+        to the main Ethereum network (gas fees), and locking up initial ETH for respective amount of $BIAN. To get the project up and started, I'm willing to give out
+        $BIAN (worth real money and tradeable for ETH) for free and distribute it around. So if you're my friend, just ask :) 
+        <br/><br/>
+        {/*  If you have interest in decentralized finance, web3, and crypto, be sure to follow me @bostonlobster on Vestr.io mobile app, where I write daily posts and produce one weekly article for the newsletter. */}
+        <center>
+        <p style={{fontSize: "27px", color: "black"}}>{Math.round(this.state.amountOfEth * 10000) / 10000} ETH against {Math.round(this.state.amountOfBian * 100) / 100} BIAN</p>
+        </center>
+        <br/>Above shows current values of assets locked in liquidity pool reserve at this moment. To verify, look up the contract address of BianDEX on etherscan: <mark style={{background: "#f5c162"}}>0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1</mark>.
+        <br/><br/><br/>To add $BIAN to Metamask, click "import tokens" then paste in following contract address: <mark style={{background: "#f5c162"}}>0x586a03aD8E72FC30af0177Ec73Cac88C7816110b</mark>.
+        Token symbol should be BIAN, with token decimal of 18. Be sure you are so under the Ethereum Mainnet network.
 
-          <br/><br/> 
+        <br/><br/><br/>
+       
+        {this.state.account.length == 0 ? <><div style={{background: "#CE1126", color: "white", textAlign: "center", cursor: "pointer"}} onClick={this.connectWallet}> Connect Metamask Wallet</div></> : 
+        <><div style={{background: "green", color: "white", textAlign: "center"}}>{this.state.account}</div></>}
+        
+        
+        </span>
+        <hr/><br/>
+        <span style={{fontSize:"20px"}}>
+        Input ETH: <input className="inputVal" value={this.state.ethInputValue} onChange={e => this.ethChange(e.target.value)}/> →  
+        Receive BIAN: {this.state.bianReceiveValue}
+        <br/><span style={{fontSize: "16px", color: "#023020"}}>Price:  
+          {this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> {Math.round(this.state.ethInputValue / this.state.bianReceiveValue * 10000) / 10000} ETH per BIAN </>}
+          {this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> or {Math.round(this.state.bianReceiveValue/ this.state.ethInputValue * 100) / 100} BIAN per ETH </>}</span>
+          <br/><br/><button style={{ backgroundColor: "#14213D", border: "none", color: "white", borderRadius: "2px", padding: "10px"}} onClick={this.initiateTransactionETHToBIAN}>Confirm Transaction (Buy $BIAN)</button>
+        <br/><br/>
+        <hr/><br/>
+        Input BIAN: <input className="inputVal" value={this.state.bianInputValue} onChange={e => this.bianChange(e.target.value)}/> → 
+        Receive ETH: {this.state.ethReceiveValue}
+        <br/><span style={{fontSize:"16px", color: "#023020"}}>Price: 
+        {this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> {Math.round(this.state.bianInputValue / this.state.ethReceiveValue * 100) / 100} BIAN per ETH </>}
+         {this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> or {Math.round(this.state.ethReceiveValue/ this.state.bianInputValue * 10000)/10000} ETH per BIAN </>}
+          <br/><br/><button style={{ backgroundColor: "#14213D", border: "none", color: "white", borderRadius: "2px", padding: "10px"}} onClick={this.initiateTransactionBIANToETH}>Confirm Transaction (Buy $ETH)</button>
+        </span>
+        </span>
+        <br/><br/><hr/><hr/><br/>
+        <span style={{fontSize: "18px", lineHeight: "25px"}}>
+        I am a first-year college student majoring in Computer Science and Engineering. I'm currently interning for Vestr.io (a social finance startup) as an Analyst. I have extensive 
+        experience developing full-stack web applications on MERN stack, and writing Ethereum blockchain smart contracts in Solidity language. I also make music, whether it's
+        writing original piano compositions (see <a target="_blank" href="/music.pdf">my portfolio</a>) or digital production on DAW (stream on <a target="_blank" href="https://open.spotify.com/artist/5QHoUe5kwjvOfjfHrbVTBY?si=evgqyFYaRF2z8sWVcE2lYw">Spotify</a>).
+        Welcome to my site!
+        </span>
+        <br/><br/><br/><br/>
+        {/* <button style={{backgroundColor: "#14213D", border: "none", color: "white", borderRadius: "2px", padding: "10px"}} onClick={this.connectWallet}>Connect Metamask Wallet</button>
+        */}
 
-          {/*
-          <hr/>
-          <h2>Become a liquidity provider (Beta)</h2>
-          <p>Liquidity providers receive certain percentage of the total transaction fees (0.3%) in LP token forms.
-            <br/>Send both $ETH and $BIAN to Token Sale Contract Address in order to become a liquidity provider.
-            <br/><br/>
-          </p>
-          \*/}
-          
-          </center>
+        
+        
+        </div>
+           
+        </center>
           
       </>
     )
