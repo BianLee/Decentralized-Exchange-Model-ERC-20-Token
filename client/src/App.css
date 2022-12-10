@@ -4,6 +4,7 @@ h1 {
 
 * {
     background-color: "#006BA6";
+    overflow-x: hidden;
 }
 
 .rectangle {
@@ -35,5 +36,14 @@ button:focus {
     .rectangle {
         width: 50%;
 
+    }
+}
+@media only screen and (max-width: 1200px) {
+    *{
+        -webkit-transform:scale(0.98);
+        -moz-transform:scale(0.98);
+        -ms-transform:scale(0.98);
+        transform:scale(0.98);
+        overflow-x: hidden;
     }
 }

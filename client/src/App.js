@@ -207,7 +207,7 @@ class App extends React.Component {
         <center>
         <p style={{fontSize: "27px", color: "black"}}>{Math.round(this.state.amountOfEth * 10000) / 10000} ETH against {Math.round(this.state.amountOfBian * 100) / 100} BIAN</p>
         </center>
-        <br/>Above shows current values of assets locked in liquidity pool reserve at this moment. To verify, look up the contract address of BianDEX on etherscan: <mark style={{background: "#f5c162"}}>0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1</mark>.
+        <br/>Above shows current values of assets locked in liquidity pool reserve at this moment. (These values change). To verify, look up the contract address of BianDEX on etherscan: <mark style={{background: "#f5c162"}}>0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1</mark>.
         <br/><br/><br/>To add $BIAN to Metamask, click "import tokens" then paste in following contract address: <mark style={{background: "#f5c162"}}>0x586a03aD8E72FC30af0177Ec73Cac88C7816110b</mark>.
         Token symbol should be BIAN, with token decimal of 18. Be sure you are so under the Ethereum Mainnet network.
 
