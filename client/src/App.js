@@ -221,7 +221,7 @@ class App extends React.Component {
         <hr/><br/>
         <span style={{fontSize:"20px"}}>
         Input ETH: <input className="inputVal" value={this.state.ethInputValue} onChange={e => this.ethChange(e.target.value)}/> →  
-        Receive BIAN: {this.state.bianReceiveValue}
+        Receive BIAN: {Math.round(this.state.bianReceiveValue * 100) / 100}
         <br/><span style={{fontSize: "16px", color: "#023020"}}>Price:  
           {this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> {Math.round(this.state.ethInputValue / this.state.bianReceiveValue * 10000) / 10000} ETH per BIAN </>}
           {this.state.bianReceiveValue == 0 || this.state.bianReceiveValue == undefined ? <></> : <> or {Math.round(this.state.bianReceiveValue/ this.state.ethInputValue * 100) / 100} BIAN per ETH </>}</span>
@@ -229,7 +229,7 @@ class App extends React.Component {
         <br/><br/>
         <hr/><br/>
         Input BIAN: <input className="inputVal" value={this.state.bianInputValue} onChange={e => this.bianChange(e.target.value)}/> → 
-        Receive ETH: {this.state.ethReceiveValue}
+        Receive ETH: {Math.round(this.state.ethReceiveValue * 10000) / 10000}
         <br/><span style={{fontSize:"16px", color: "#023020"}}>Price: 
         {this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> {Math.round(this.state.bianInputValue / this.state.ethReceiveValue * 100) / 100} BIAN per ETH </>}
          {this.state.ethReceiveValue == 0 || this.state.ethReceiveValue == undefined ? <></> : <> or {Math.round(this.state.ethReceiveValue/ this.state.bianInputValue * 10000)/10000} ETH per BIAN </>}
