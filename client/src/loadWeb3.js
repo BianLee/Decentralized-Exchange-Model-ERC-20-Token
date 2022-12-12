@@ -1,9 +1,6 @@
 const Web3 = require('web3');
 const web3 = new Web3(Web3.givenProvider); 
 
-// const web3 = new Web3(new Web3.providers.HttpProvider('https://mainnet.infura.io/v3/7f36e75226334b0498ce7547dca2bc14'));
-
-// Set the ERC-20 balanceOf() ABI
 const balanceOfABI = [
     {
         "constant": true,
@@ -43,12 +40,8 @@ const balanceOfABI = [
     }
 ];
 
-const tokenContract = "0x586a03aD8E72FC30af0177Ec73Cac88C7816110b"
-const tokenHolder = "0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1"
-
 export const approveBTS = async(amount) => {
     
-    console.log("fuck you bitch")
     const accounts = await window.ethereum.request({ method: 'eth_requestAccounts' });
     console.log(accounts[0])
     // Define the ERC-20 token contract

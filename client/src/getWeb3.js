@@ -13,9 +13,6 @@ export const load = async() => {
     const bal = await contractBT.balanceOf(account); //balance on buyer's account (what's the unit?)
     const myBT = bal / 10**18;
 
-   
-
-
     return {account, contractBTS, contractBT, ethFunds, bianFunds, transactionCount, tokensSold, transactions, myBT};
 }
 

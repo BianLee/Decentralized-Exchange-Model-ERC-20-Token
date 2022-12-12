@@ -208,8 +208,6 @@ class App extends React.Component {
             <br/>
 
               <div>
-                <b>$BIAN Token Contract Address</b>: 0x586a03aD8E72FC30af0177Ec73Cac88C7816110b
-                <br/><b>BianDex Contract Address</b>: 0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1
                 <br/>
               </div>
           

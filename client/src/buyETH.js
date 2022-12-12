@@ -1,9 +1,6 @@
 const Web3 = require('web3')
 const web3 = new Web3(Web3.givenProvider); 
-// const web3 = new Web3(new Web3.providers.HttpProvider('https://goerli.infura.io/v3/7f36e75226334b0498ce7547dca2bc14'));
 
-//const tokenContract = "0x861A87be2F0b630e1da20b49065eFa4554f4514b" 
-const tokenSaleContract = "0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1"
 
 const BianTokenSaleABI = [
         {
