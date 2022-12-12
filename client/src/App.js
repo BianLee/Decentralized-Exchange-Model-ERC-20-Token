@@ -209,7 +209,7 @@ class App extends React.Component {
         </center>
         <br/>Above shows current values of assets locked in liquidity pool reserve at this moment. (These values change). To verify, look up the contract address of BianDEX on etherscan: <mark style={{background: "#f5c162"}}>0x4Fb63A985099FcDd0004bf7b93511E8CA8a7E7A1</mark>.
         <br/><br/><br/>To add $BIAN to Metamask, click "import tokens" then paste in following contract address: <mark style={{background: "#f5c162"}}>0x586a03aD8E72FC30af0177Ec73Cac88C7816110b</mark>.
-        Token symbol should be BIAN, with token decimal of 18. Be sure you are so under the Ethereum Mainnet network.
+        Token symbol should be BIAN, with token decimal of 18. Be sure you are under the Ethereum Mainnet network.
 
         <br/><br/><br/>
        
@@ -238,9 +238,9 @@ class App extends React.Component {
         </span>
         <br/><br/><hr/><hr/><br/>
         <span style={{fontSize: "18px", lineHeight: "25px"}}>
-        I am a first-year college student majoring in Computer Science and Engineering. I'm currently interning for Vestr.io (a social finance startup) as an Analyst. I have extensive 
+        I am a first-year college student majoring in Computer Science and Engineering with intended double major in Economics. I'm currently interning for Vestr.io (a social finance startup) as an Analyst. I have extensive 
         experience developing full-stack web applications on MERN stack, and writing Ethereum blockchain smart contracts in Solidity language. I also make music, whether it's
-        writing original piano compositions (see <a target="_blank" href="/music.pdf">my portfolio</a>) or digital production on DAW (stream on <a target="_blank" href="https://open.spotify.com/artist/5QHoUe5kwjvOfjfHrbVTBY?si=evgqyFYaRF2z8sWVcE2lYw">Spotify</a>).
+        writing original piano compositions (see <a target="_blank" href="/music.pdf">my portfolio</a>) or digitally producing on DAW (stream on <a target="_blank" href="https://open.spotify.com/artist/5QHoUe5kwjvOfjfHrbVTBY?si=evgqyFYaRF2z8sWVcE2lYw">Spotify</a>).
         Welcome to my site!
         </span>
         <br/><br/><br/><br/>
