@@ -1,7 +1,6 @@
 # Decentralized Exchange & ERC-20 Token
 
-![DEX](https://www.youtube.com/watch?v=3AcyorIvDXQ&ab_channel=BianLee)
-[![IMAGE ALT TEXT HERE](https://www.youtube.com/watch?v=3AcyorIvDXQ&ab_channel=BianLee)](https://www.youtube.com/watch?v=3AcyorIvDXQ&ab_channel=BianLee)
+<iframe width="560" height="315" src="https://www.youtube.com/embed/3AcyorIvDXQ" frameborder="0" allowfullscreen></iframe>
 
 ## Overview
 A decentralized exchange (DEX) that allows users to trade a custom ERC-20 Token against Ethereum using MetaMask wallet. Implemented Constant Product Market formula used in Automated Market Making (AMM) systems, and deployed on Ethereum blockchain (mainnet). 
